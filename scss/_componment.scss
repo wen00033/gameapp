@@ -1,0 +1,88 @@
+@import "./variable";
+
+$new-color: $color-first;
+
+.component {
+  position: relative;
+  transition: all 300ms ease-in-out;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+  .background {
+    width: 100%;
+  }
+
+  .gametitle {
+    width: 100%;
+    background-color: $new-color;
+    align-self: center;
+    color: white;
+  }
+  .overlay {
+    background-color: $new-color;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+
+    .score {
+      padding: $item-space;
+      color: $color-third;
+      p {
+        font-weight: 800;
+        aspect-ratio: 1/1;
+        padding: 1rem;
+        border: 1px solid $color-third;
+      }
+    }
+  }
+}
+.game-description {
+  color: white;
+  font-weight: 800;
+  transition: all 400ms ease-in-out;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 9999;
+  display: none;
+  opacity: 0;
+  & > * {
+    display: flex;
+    padding-block: 2rem;
+    padding-inline: 1rem;
+    justify-content: space-between;
+  }
+}
+
+.component:hover .game-description,
+.component:focus .game-description {
+  display: block;
+  background-color: $new-color;
+  opacity: 1;
+}
+
+// .genre-container > *:not(:nth-last-child(1)) {
+//   margin-inline-end: 1rem;
+// }
+
+.genre {
+  @include item;
+  background-color: $color-third;
+  color: black;
+}
+
+.playtime-text {
+  @include item;
+  background-color: $color-second;
+}

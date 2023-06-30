@@ -1,0 +1,58 @@
+@import "./mixin";
+@import "./variable";
+h3 {
+  text-align: center;
+  margin-block: $item-space;
+  padding-inline: 1rem;
+  font-size: 2rem;
+}
+
+header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-inline: 1rem;
+}
+// ---------------------------------
+iframe {
+  aspect-ratio: 16/9;
+  width: 100%;
+}
+// -----title--------------
+
+.banner-text {
+  text-align: center;
+  margin-block: $item-space;
+  padding-inline: 1rem;
+  white-space: nowrap;
+  display: inline-block;
+  font-size: 1.6rem;
+  @include backgroundshape;
+  &::after {
+    background-color: purple;
+  }
+}
+
+p,
+span {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+span {
+  font-weight: 800;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.title {
+  text-align: center;
+  font-size: 18vw;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.svg {
+  aspect-ratio: 1/1;
+  width: 3rem;
+  color: $color-third;
+}

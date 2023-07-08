@@ -1,5 +1,5 @@
-@import "./mixin";
-@import "./variable";
+@import './mixin';
+@import './variable';
 h3 {
   text-align: center;
   margin-block: $item-space;
@@ -7,18 +7,22 @@ h3 {
   font-size: 2rem;
 }
 
-header {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding-inline: 1rem;
-}
 // ---------------------------------
 iframe {
   aspect-ratio: 16/9;
   width: 100%;
 }
 // -----title--------------
+
+.banner {
+  position: relative;
+}
+.banner-content {
+  position: absolute;
+  padding: 1rem;
+  width: 50%;
+  transform: translate(0, -120%);
+}
 
 .banner-text {
   text-align: center;
@@ -39,6 +43,9 @@ span {
   font-weight: 400;
 }
 span {
+  text-transform: uppercase;
+  align-self: center;
+  text-shadow: 2px 2px 0px $color-second;
   font-weight: 800;
   color: white;
   letter-spacing: 1px;
@@ -51,8 +58,232 @@ span {
   white-space: nowrap;
 }
 
-.svg {
-  aspect-ratio: 1/1;
-  width: 3rem;
+h2 {
+  @include backgroundshape;
+  margin: 1rem;
+  letter-spacing: 1px;
   color: $color-third;
+  text-shadow: 4px 4px 0px $color-second;
+  padding-block: 1rem;
+  font-size: 7vw;
+  // color: white;
+  text-transform: uppercase;
+  text-align: center;
+  &::after {
+    background: linear-gradient(to top right, $color-third, $color-first);
+    width: 90%;
+  }
+}
+
+.svg {
+  aspect-ratio: 1;
+  width: 2.5rem;
+}
+.header-nav {
+  aspect-ratio: 1;
+  width: 4rem;
+  cursor: pointer;
+}
+
+a {
+  color: white;
+
+  transition: all 200ms ease-in-out;
+  text-transform: uppercase;
+  text-align: center;
+  margin-block: $item-space;
+  padding-inline: 1rem;
+  font-size: 1.7rem;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $color-third;
+  transform: scale(1.1);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.522);
+}
+
+.next {
+  @include item;
+  text-transform: uppercase;
+  transition: all 300ms ease-out;
+  background-color: $color-third;
+  margin: 2rem;
+  box-shadow: 2px 2px 0px $color-second;
+  cursor: pointer;
+}
+
+.next:hover {
+  transform: scale(1.1);
+  box-shadow: 4px 4px 0px $color-second;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.spinner-container {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.spinner {
+  width: 7rem;
+}
+// ------ console---------------
+.console {
+  padding: $item-space;
+  align-self: center;
+}
+.console > *:not(:nth-last-child(1)) {
+  margin-inline-end: $item-space;
+}
+// -------------------Game detail page------------------------------------------
+.game-background {
+  position: relative;
+  .main-game-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-inline: 0.5rem;
+    animation: fadeIn 4s ease-in-out 1s;
+    .website {
+      white-space: nowrap;
+      padding-block: 0.5rem;
+      padding-inline: 1rem;
+      border-radius: 2px;
+      background-color: $color-third;
+      letter-spacing: 2px;
+      border: none;
+      a {
+        color: black;
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    }
+  }
+  .game-name {
+    font-size: 2rem;
+    color: $color-third;
+  }
+
+  .game-score {
+    background-color: $color-third;
+    padding: 0.5rem;
+    color: white;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    p {
+      font-size: 2rem;
+      font-weight: bold;
+      // text-shadow: 2px 2px 0px $color-second;
+    }
+  }
+}
+// --------------gameing detail-------------------
+.content-wrapper {
+  margin-block: 2rem;
+}
+.game-detail > *:not(:nth-last-child(1)) {
+  padding-block: 2rem;
+}
+
+.game-main-content {
+  p {
+    text-align: justify;
+    background-color: white;
+    padding: 1rem;
+    font-size: 1.6rem;
+    margin-block: 1rem;
+    line-height: 2.5rem;
+    br {
+      margin: 2rem;
+    }
+  }
+}
+// ---------------------------
+.main-game-content > * {
+  margin-block: 0.5rem;
+}
+
+.Game-preview {
+  padding: 2rem;
+  margin-top: 1rem;
+}
+.developer,
+.release-date {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.main-image {
+  width: 100%;
+  aspect-ratio: 16/9;
+  // padding: 1rem;
+  object-fit: cover;
+  object-position: center;
+  height: fit-content;
+}
+
+.thumb-nail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  img {
+    width: 70px;
+    height: 70px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+// -----------------------
+.image-collection {
+  padding: 2rem;
+}
+
+footer {
+  justify-content: space-between;
+  display: flex;
+  background-color: $color-first;
+  padding-block: 3rem;
+  color: white;
+  padding-inline: 2rem;
+  p,
+  span {
+    text-transform: uppercase;
+    font-size: 3rem;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  .background {
+    aspect-ratio: 16/9;
+  }
+  .content-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .content-wrapper > * {
+    margin: 1rem;
+  }
+  .main-game-content {
+    padding: 2rem;
+    animation: fadeIn 4s ease-in-out 1s;
+  }
+  .game-name {
+    font-size: 4vw !important;
+    color: $color-third;
+  }
+  .main-game-content > *:not(:nth-child(1)) {
+    margin-block: 1rem;
+  }
 }

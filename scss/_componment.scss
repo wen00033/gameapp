@@ -1,4 +1,4 @@
-@import "./variable";
+@import './variable';
 
 $new-color: $color-first;
 
@@ -9,6 +9,11 @@ $new-color: $color-first;
   display: flex;
   flex-direction: column;
   height: fit-content;
+}
+.component:hover,
+.component:focus {
+  box-shadow: 5px 5px 0px $color-second;
+  transform: rotate(-1deg);
 }
 
 .container {
@@ -72,10 +77,6 @@ $new-color: $color-first;
   opacity: 1;
 }
 
-// .genre-container > *:not(:nth-last-child(1)) {
-//   margin-inline-end: 1rem;
-// }
-
 .genre {
   @include item;
   background-color: $color-third;
@@ -85,4 +86,24 @@ $new-color: $color-first;
 .playtime-text {
   @include item;
   background-color: $color-second;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner-container {
+  // grid-column: 2 / span 2;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto auto 0;
+  padding: 1rem;
+  .spinner {
+    animation: rotate 2s infinite linear;
+  }
 }

@@ -1,74 +1,101 @@
-import * as model from "./model.js";
+import * as model from './model.js';
+import Gameview from './view.js';
+// -----------------------------------------
 
-const listContainer = document.querySelector(".game-list");
-const background = document.querySelector(".container");
-let page = `page=1`;
-
-const svg = function (el) {
-  if (el === "pc") {
-    return '<img class="svg" src="svg/Window.svg" alt="console" />';
-  }
-  if (el === "playstation") {
-    return '<img class="svg" src="svg/Playstation.svg" alt="console" />';
-  }
-  if (el === "xbox") {
-    return '<img class="svg" src="svg/Xbox.svg" alt="console" />';
-  }
+// ---------------------------------
+const nextpage = document.querySelector('.next');
+let num = 1;
+let page = `page=${num}`;
+const thenextPage = function () {
+  // mainpage.classList.remove('animation');
+  // mainpage.classList.add('animation');
+  num++;
+  console.log(num);
+  let newpage = `page=${num}`;
+  // console.log(newpage);
+  showGameList(newpage);
 };
-
-const showGame = async function (page) {
+nextpage.addEventListener('click', thenextPage);
+// ----------------------------------------------
+const showGameList = async function (page) {
   try {
+    if (!page) return;
+    Gameview.loadingSpinner();
+
     await model.loadGameList(page);
-    model.state.search.result.map((el) => RenderGameList(el));
+    Gameview.render(model.state.search.result);
   } catch (err) {
-    console.error(err);
+    Gameview.renderErrror(err);
   }
 };
-showGame(page);
+showGameList(page);
+// ------------------------------------------------
 
-const RenderGameList = function (gamedata) {
-  const markup = `
-     <div class="component">
-            <div class="container">
-              <div class="overlay">
-                <div class="console">
-                ${gamedata.platforms
-                  .map((el) => svg(el.platform.slug))
-                  .join("")}
-                </div>
-                <div class="score"><p>${gamedata.score}</p></div>
-              </div>
-              <img class="background" src="${
-                gamedata.image
-              }" alt="background" />
-              <div class="gametitle">
-              <h3 data-id=${gamedata.id}>${gamedata.title}</h3>
-              </div>             
-            </div>
-            <div class="game-description">
-            <div class="game-release-date">
-                <span>Title:</span>
-                <h3>${gamedata.title}</h3>
-              </div>
-              <div class="game-release-date">
-                <span>release date:</span>
-                <p>${gamedata.release}</p>
-              </div>
-              <div class="game-genre">
-                <span>genre:</span>
-                <div class="genre-container">${gamedata.genres
-                  .map((el) => `<p class="genre">${el.name}</p>`)
-                  .join("")}</div>
-              </div>
-              <div class="playtime">
-                <span>playtime:</span>
-                <p class="playtime-text">${gamedata.playtime} hours</p>
-              </div>
-            </div>
-          </div>
-     `;
-  //   listContainer.innerHTML = "";
-  listContainer.insertAdjacentHTML("afterbegin", markup);
+const id = window.location.hash.slice(1);
+console.log(id);
+
+const showGamedetail = async function () {
+  try {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    Gameview.loadingSpinner();
+    await model.loadGameDetail(id);
+    console.log(model.state.gamedata);
+    Gameview.render1(model.state.gamedata);
+    console.log(id);
+    // ----------------------------
+    const thumbsimage = document.querySelectorAll('.thumbsnail');
+    const main = document.querySelector('.main-image');
+    // let count = 0;
+    console.log(thumbsimage[1]);
+    for (let i = 0; i < thumbsimage.length; i++) {
+      let img = thumbsimage[i];
+
+      img.addEventListener('click', function () {
+        main.src = this.src;
+      });
+    }
+
+    // -----------------------------
+  } catch (err) {
+    Gameview.renderErrror(err);
+  }
 };
+
+window.addEventListener('hashchange', showGamedetail);
+const backToHome = document.getElementById('home');
+const home = function () {
+  window.location.hash = '';
+  location.reload();
+};
+backToHome.addEventListener('click', home);
+// ----------------------------------------------
 
 // getJson();
+// ----------testing-------------------
+// const images = document.querySelectorAll('[data-src]');
+// const imgOptions = {
+//   threshold: 0,
+// };
+// const preloadImage = function (img) {
+//   const src = img.getAttribute('data-src');
+//   if (!src) {
+//     return;
+//   }
+//   img.src = src;
+// };
+
+// const imgObserver = new IntersectionObserver((entries, imgObserver) => {
+//   entries.forEach(entry => {
+//     if (!entry.isIntersecting) {
+//       return;
+//     } else {
+//       preloadImage(entry.target);
+//       imgObserver.unobserve(entry.target);
+//     }
+//   });
+// }, imgOptions);
+
+// images.forEach(img => {
+//   imgObserver.observe(img);
+// });

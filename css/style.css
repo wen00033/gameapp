@@ -30,6 +30,9 @@ iframe {
 
 .banner {
   position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+  background: linear-gradient(to top right, #ffc600, #faea48);
+  height: 30rem;
 }
 
 .banner-content {
@@ -37,6 +40,22 @@ iframe {
   padding: 1rem;
   width: 50%;
   transform: translate(0, -120%);
+}
+
+.bookmark {
+  width: 3rem;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  fill: white;
+}
+
+.bookmark:hover {
+  transform: scale(1.5);
+}
+
+.bookmark:active {
+  fill: #e900ff;
 }
 
 .banner-text {
@@ -115,8 +134,8 @@ h2::after {
 }
 
 .svg {
-  aspect-ratio: 1;
-  width: 2.5rem;
+  aspect-ratio: 1/1;
+  width: 2rem;
 }
 
 .header-nav {
@@ -181,7 +200,7 @@ a:hover {
 }
 
 .console {
-  padding: 1rem;
+  padding-inline: 1rem;
   align-self: center;
 }
 
@@ -295,8 +314,9 @@ a:hover {
 }
 
 footer {
-  justify-content: space-between;
   display: flex;
+  gap: 2rem;
+  flex-direction: column;
   background-color: #5800ff;
   padding-block: 3rem;
   color: white;
@@ -304,8 +324,9 @@ footer {
 }
 footer p,
 footer span {
+  align-self: center;
   text-transform: uppercase;
-  font-size: 3rem;
+  font-size: 1.6rem;
 }
 
 @media only screen and (min-width: 767px) {
@@ -338,7 +359,7 @@ footer span {
   margin: 1rem;
   display: flex;
   flex-direction: column;
-  height: fit-content;
+  height: auto;
 }
 
 .component:hover,
@@ -352,8 +373,8 @@ footer span {
   flex-direction: column;
   justify-content: space-between;
 }
-.container img {
-  aspect-ratio: 1/1;
+.container .background-image {
+  aspect-ratio: 12/9;
   object-fit: cover;
 }
 .container .background {
@@ -641,12 +662,33 @@ body {
 }
 
 .game-header {
-  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  justify-content: right;
   padding-inline: 1rem;
   background-color: #5800ff;
   padding: 2rem;
   display: flex;
   flex-direction: row;
+}
+.game-header input {
+  padding: 1rem;
+  border-radius: 2rem;
+  width: 17rem;
+}
+.game-header button {
+  letter-spacing: 0.5px;
+  font-weight: 800;
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  box-shadow: 2px 2px 0px black;
+  background-color: #e900ff;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 300;
+  border-radius: 1rem;
 }
 
 .login {

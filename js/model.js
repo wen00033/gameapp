@@ -1,14 +1,23 @@
 import { getJson } from './helper.js';
-import { apiUrl } from './config.js';
-import { detailUrl } from './config.js';
-import { screenshotsUrl } from './config.js';
-import { similarUrl } from './config.js';
+// import { isEmpty } from 'lodash-es';
+// import { isNil } from 'lodash-es';
+import {
+  apiUrl,
+  detailUrl,
+  screenshotsUrl,
+  similarUrl,
+  searchQuery,
+} from './config.js';
 
 export const state = {
+  bookmark: [],
+  next: {},
+  list: [],
   gamedata: {},
   search: {
+    next: {},
     query: '',
-    result: [],
+    results: [],
   },
 };
 
@@ -16,7 +25,8 @@ export const loadGameList = async function (page) {
   try {
     const data = await getJson(`${apiUrl}${page}`);
     console.log(data);
-    state.search.result = data.results.map(gamedata => {
+    state.next = data.next;
+    state.list = data.results.map(gamedata => {
       return {
         id: gamedata.id,
         title: gamedata.name,
@@ -25,10 +35,7 @@ export const loadGameList = async function (page) {
         platforms: gamedata.parent_platforms,
         genres: gamedata.genres,
         release: gamedata.released,
-        screenshots: gamedata.short_screenshots,
-        store: gamedata.stores,
         tag: gamedata.tags,
-        numReviews: gamedata.reviews_count,
         playtime: gamedata.playtime,
       };
     });
@@ -71,4 +78,34 @@ export const loadGameDetail = async function (id) {
   } catch (err) {
     throw err;
   }
+};
+
+export const loadSearch = async function (query) {
+  try {
+    const data = await getJson(searchQuery(query));
+    console.log(data);
+    state.search.next = data.next;
+    state.search.results = data.results.map(gamedata => {
+      return {
+        id: gamedata.id,
+        title: gamedata.name,
+        image: gamedata.background_image,
+        score: gamedata.metacritic,
+        platforms: gamedata.parent_platforms,
+        genres: gamedata.genres,
+        release: gamedata.released,
+        tag: gamedata.tags,
+        playtime: gamedata.playtime,
+      };
+    });
+    console.log(state.search.next);
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const bookmark = function (game) {
+  state.bookmark.push(game);
+  if (game.id === state.gamedata.id) state.gamedata.bookmarked = true;
+  // localStorage.setItem('bookmarks', JSON.stringify(state.bookmark));
 };

@@ -164,13 +164,29 @@ body {
 }
 
 .game-header {
-  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  justify-content: right;
   padding-inline: 1rem;
   background-color: $color-first;
   padding: 2rem;
   display: flex;
   flex-direction: row;
+  input {
+    padding: 1rem;
+    border-radius: 2rem;
+    width: 17rem;
+  }
+  button {
+    @include item;
+    background-color: $color-second;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 300;
+    border-radius: 1rem;
+  }
 }
+
 // -------------------
 
 // --------------------------

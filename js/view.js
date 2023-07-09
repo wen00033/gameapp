@@ -86,9 +86,12 @@ class Gameview {
       <div class="game-title">
         <span>Title:</span>
         <a href="#${data.id}">${data.title}</a>
+        <img data-id="${
+          data.id
+        }" class="bookmark" src="svg/bookmark.svg" alt="bookmark" >
       </div>
       <div class="game-release-date">
-        <span>release date:</span>
+        <span>released date:</span>
         <p>${data.release}</p>
       </div>
       <div class="game-genre">
@@ -105,6 +108,16 @@ class Gameview {
   </div>
     `;
   }
+
+  addBookmarkHandler(handler) {
+    this.#secondparentElement.addEventListener('click', function (e) {
+      e.preventDefault();
+      const button = e.target.closest('.bookmark');
+      if (!button) return;
+      handler();
+    });
+  }
+
   #gamedetail(data) {
     const svg = function (el) {
       if (el === 'pc') {
@@ -146,6 +159,11 @@ class Gameview {
     </section>
     <div class="content-wrapper">
       <section class="game-detail">
+      <div class="bookmark-container">
+      <img data-id="${
+        data.id
+      }" class="bookmark" src="svg/bookmark.svg" alt="bookmark" >
+      </div>
         <div class="developer">
           <span>Developer :</span>
           ${data.developers.map(el => `<p>${el.name}</p>`).join('')}

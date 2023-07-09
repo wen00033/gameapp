@@ -9,44 +9,25 @@
   </head>
   <body>
     <header class="game-header">
-      <div class="hamburger-wrapper">
-        <nav class="nav">
-          <button class="nav__btn nav__btn--bookmarks">Bookmarks</button>
-          <div class="bookmarks">
-            <ul class="bookmarks__list"></ul>
-          </div>
-        </nav>
-        <form class="login">
-          <div class="login-form">
-            <div class="input-field">
-              <label>Login:</label>
-              <input type="text" id="name" name="name" />
-            </div>
-            <div class="input-field">
-              <label>Password:</label>
-              <input type="text" id="Password" name="number" />
-            </div>
-          </div>
-        </form>
-      </div>
       <img id="home" class="header-nav" src="svg/home.svg" alt="home" />
-      <img class="header-nav" src="svg/Hamburger Menu.svg" alt="menu" />
+      <form class="search">
+        <input
+          class="inputValue"
+          type="text"
+          name="text"
+          placeholder="search........"
+        />
+      </form>
     </header>
 
-    <main  class="change-page">
-      <div class="banner">
-        <div>
-          <h1 class="title">Gameapp</h1>
-          <p>Enjoy play this game!</p>
-        </div>
-      </div>
+    <main class="change-page">
       <section>
         <div class="wrapper">
           <h2>Choose your game!</h2>
           <div class="game-list"></div>
         </div>
         <div class="action">
-          <button class="next"></a>more...</button>
+          <button class="next">more...</button>
         </div>
       </section>
     </main>

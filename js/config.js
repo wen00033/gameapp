@@ -8,5 +8,6 @@ export const screenshotsUrl = function (id) {
 export const similarUrl = function (id) {
   return `https://api.rawg.io/api/games/${id}/game-series?key=e9c34ba2efe342eca83f731ac1496ea4`;
 };
-
-// https://api.rawg.io/api/games/22/youtube?key=e9c34ba2efe342eca83f731ac1496ea4
+export const searchQuery = function (query) {
+  return `https://api.rawg.io/api/games?search=${query}&key=e9c34ba2efe342eca83f731ac1496ea4`;
+};

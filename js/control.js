@@ -16,14 +16,16 @@ const thenextPage = function () {
   showGameList(newpage);
 };
 nextpage.addEventListener('click', thenextPage);
+// ----------------------------------------
+
 // ----------------------------------------------
 const showGameList = async function (page) {
   try {
     if (!page) return;
     Gameview.loadingSpinner();
-
     await model.loadGameList(page);
-    Gameview.render(model.state.search.result);
+    Gameview.render(model.state.list);
+    // -----------------------------------------------
   } catch (err) {
     Gameview.renderErrror(err);
   }
@@ -42,7 +44,8 @@ const showGamedetail = async function () {
     await model.loadGameDetail(id);
     console.log(model.state.gamedata);
     Gameview.render1(model.state.gamedata);
-    console.log(id);
+    document.querySelector('.search').style.display = 'none';
+
     // ----------------------------
     const thumbsimage = document.querySelectorAll('.thumbsnail');
     const main = document.querySelector('.main-image');
@@ -61,41 +64,37 @@ const showGamedetail = async function () {
     Gameview.renderErrror(err);
   }
 };
+// --------------------------------------------
+const searchResults = async function () {
+  try {
+    const query = document.querySelector('.inputValue').value;
+    // console.log(query);
+    if (!query) return;
+    await model.loadSearch(query);
+    Gameview.render(model.state.search.results);
+  } catch (err) {
+    Gameview.renderErrror(err);
+  }
+};
+
+document.querySelector('.search').addEventListener('submit', function (e) {
+  e.preventDefault();
+  searchResults();
+});
 
 window.addEventListener('hashchange', showGamedetail);
+
 const backToHome = document.getElementById('home');
 const home = function () {
   window.location.hash = '';
   location.reload();
 };
+
 backToHome.addEventListener('click', home);
-// ----------------------------------------------
-
-// getJson();
-// ----------testing-------------------
-// const images = document.querySelectorAll('[data-src]');
-// const imgOptions = {
-//   threshold: 0,
-// };
-// const preloadImage = function (img) {
-//   const src = img.getAttribute('data-src');
-//   if (!src) {
-//     return;
-//   }
-//   img.src = src;
+// // ----------------------------------------------
+// const addBookmark = function () {
+//   model.bookmark(model.state.gamedata);
+//   console.log(model.state.gamedata);
 // };
 
-// const imgObserver = new IntersectionObserver((entries, imgObserver) => {
-//   entries.forEach(entry => {
-//     if (!entry.isIntersecting) {
-//       return;
-//     } else {
-//       preloadImage(entry.target);
-//       imgObserver.unobserve(entry.target);
-//     }
-//   });
-// }, imgOptions);
-
-// images.forEach(img => {
-//   imgObserver.observe(img);
-// });
+// -------------------------

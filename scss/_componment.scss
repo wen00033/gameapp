@@ -3,6 +3,8 @@
 $new-color: $color-first;
 
 .component {
+  aspect-ratio: 10/10;
+  height: 100%;
   position: relative;
   transition: all 300ms ease-in-out;
   margin: 1rem;
@@ -12,6 +14,7 @@ $new-color: $color-first;
 }
 .component:hover,
 .component:focus {
+  background-color: $color-first;
   box-shadow: 5px 5px 0px $color-second;
   transform: rotate(-1deg);
 }
@@ -88,6 +91,7 @@ $new-color: $color-first;
   background-color: $color-second;
 }
 
+// ---------------------------------------
 @keyframes rotate {
   0% {
     transform: rotate(0);

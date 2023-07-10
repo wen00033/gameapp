@@ -72,6 +72,11 @@ const searchResults = async function () {
     if (!query) return;
     await model.loadSearch(query);
     Gameview.render(model.state.search.results);
+    if (model.state.search.results.length === 0) {
+      throw new Error(
+        'Unfortunatelty We not able to find your game, please try different name.'
+      );
+    }
   } catch (err) {
     Gameview.renderErrror(err);
   }

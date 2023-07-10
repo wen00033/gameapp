@@ -14,7 +14,6 @@ html {
   box-sizing: inherit;
   font-size: 62.5%;
   font-family: "roboto";
-  height: 100%;
 }
 
 h3 {
@@ -43,12 +42,21 @@ iframe {
   transform: translate(0, -120%);
 }
 
+.bookmark-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .bookmark {
   width: 3rem;
   aspect-ratio: 1;
   cursor: pointer;
   transition: all 0.2s ease-out;
-  fill: white;
+  border: none;
+  background: none;
+}
+.bookmark .bookmark-svg {
+  width: 5rem;
 }
 
 .bookmark:hover {

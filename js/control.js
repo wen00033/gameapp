@@ -101,5 +101,14 @@ backToHome.addEventListener('click', home);
 //   model.bookmark(model.state.gamedata);
 //   console.log(model.state.gamedata);
 // };
+const controlBookmark = function () {
+  model.bookmark(model.state.gamedata);
+  Gameview.render1(model.state.gamedata);
+  console.log(model.state.gamedata);
+};
 
 // -------------------------
+const init = function () {
+  Gameview.addBookmarkHandler(controlBookmark);
+};
+init();

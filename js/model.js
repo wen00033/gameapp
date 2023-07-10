@@ -74,6 +74,9 @@ export const loadGameDetail = async function (id) {
       screenshots: data[0].results,
       similargame: data[2].results,
     };
+    if (state.bookmark.some(i => i.id === id)) state.gamedata.bookmarked = true;
+    else state.gamedata.bookmarked = false;
+
     console.log(state.gamedata);
   } catch (err) {
     throw err;
@@ -107,5 +110,10 @@ export const loadSearch = async function (query) {
 export const bookmark = function (game) {
   state.bookmark.push(game);
   if (game.id === state.gamedata.id) state.gamedata.bookmarked = true;
-  // localStorage.setItem('bookmarks', JSON.stringify(state.bookmark));
+  console.log(state.bookmark);
+  localStorageBookmark();
+};
+
+const localStorageBookmark = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmark));
 };

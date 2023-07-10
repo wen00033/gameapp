@@ -86,9 +86,6 @@ class Gameview {
       <div class="game-title">
         <span>Title:</span>
         <a href="#${data.id}">${data.title}</a>
-        <img data-id="${
-          data.id
-        }" class="bookmark" src="svg/bookmark.svg" alt="bookmark" >
       </div>
       <div class="game-release-date">
         <span>released date:</span>
@@ -111,7 +108,6 @@ class Gameview {
 
   addBookmarkHandler(handler) {
     this.#secondparentElement.addEventListener('click', function (e) {
-      e.preventDefault();
       const button = e.target.closest('.bookmark');
       if (!button) return;
       handler();
@@ -160,9 +156,10 @@ class Gameview {
     <div class="content-wrapper">
       <section class="game-detail">
       <div class="bookmark-container">
-      <img data-id="${
-        data.id
-      }" class="bookmark" src="svg/bookmark.svg" alt="bookmark" >
+      <button class="bookmark"><img class="svg bookmark-svg" 
+      src="svg/${
+        data.bookmarked ? 'bookmark-active.svg' : 'bookmark.svg'
+      }" alt="bookmark" ></button> 
       </div>
         <div class="developer">
           <span>Developer :</span>
